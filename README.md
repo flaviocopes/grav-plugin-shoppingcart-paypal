@@ -1,8 +1,8 @@
 # PayPal add-on for the Grav Shopping Cart
 
-! Make sure you have a PayPal Premier / Business account or the plugin will not work.
-
 This plugin adds PayPal Express Checkout to your Shopping Cart.
+
+### Warning: Make sure you have a PayPal Premier / Business account or the plugin will not work.
 
 # Installation
 
