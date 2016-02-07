@@ -3,7 +3,6 @@ payment:
     methods:
         paypal_express: # http://www.putler.com/support/faq/how-to-get-paypal-api-username-password-and-signature-information/
             name: "PayPal Express"
-            enabled: true
             username: '' # Add your own
             password: '' # Add your own
             signature: '' # Add your own

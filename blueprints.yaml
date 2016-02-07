@@ -1,0 +1,60 @@
+name: Shopping Cart Plugin PayPal Express
+version: 1.0.0
+description: "Add PayPal Express checkout to the Grav Shopping Cart Plugin. Requires a PayPal Premier / Business account."
+icon: shopping-cart
+author:
+  name: Flavio Copes
+  email: copesc@gmail.com
+  url: http://flaviocopes.com
+homepage: http://gravshoppingcart.com
+keywords: shoppingcart, ecommerce, e-commerce, plugin, shop, cart, paypal
+readme: https://github.com/flaviocopes/grav-plugin-shoppingcart/blob/develop/README.md
+bugs: https://github.com/flaviocopes/grav-plugin-shoppingcart/issues
+license: MIT
+
+form:
+  validation: loose
+  fields:
+    enabled:
+      type: toggle
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
+      highlight: 1
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    payment.methods.paypal_express.name:
+      type: hidden
+      default: 'PayPal Express'
+
+    payment.methods.paypal_express.name:
+      type: spacer
+      text: See <a target="_blank" href="http://www.putler.com/support/faq/how-to-get-paypal-api-username-password-and-signature-information/">this link</a> on how to fill the following required fields
+
+    payment.methods.paypal_express.username:
+      type: text
+      default: ''
+      label: Username
+      size: medium
+      placeholder: The PayPal Username
+      help: The PayPal Username
+
+    payment.methods.paypal_express.password:
+      type: text
+      default: ''
+      label: Password
+      size: medium
+      placeholder: The PayPal Password
+      help: The PayPal Password
+
+    payment.methods.paypal_express.signature:
+      type: text
+      default: ''
+      label: Signature
+      size: medium
+      placeholder: The PayPal Signature
+      help: The PayPal Signature
+

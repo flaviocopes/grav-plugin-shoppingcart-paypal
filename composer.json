@@ -1,5 +1,5 @@
 {
-    "name": "flaviocopes/grav-plugin-shoppingcart-pro",
+    "name": "flaviocopes/grav-plugin-shoppingcart-paypal",
     "description": "PayPal Plugin for Grav Shopping Cart",
     "license": "MIT",
     "authors": [
