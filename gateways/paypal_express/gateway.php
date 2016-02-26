@@ -22,12 +22,6 @@ class ShoppingCartGatewayPayPalExpress extends ShoppingCartGateway
         $signature = $gatewayConfig['signature'];
         $test_mode = $pluginConfig['test_mode'];
 
-        //OpenSSL 1.0.1 Required for Sandbox
-        if($test_mode && OPENSSL_VERSION_NUMBER < 0x1000100f) {
-            echo "OpenSSL Version Out-of-Date. PayPal Sandbox needs 1.0.1 for TLS 1.2";
-            exit();
-        }
-
         $gateway = Omnipay::create('PayPal_Express');
         $gateway->setUsername($username);
         $gateway->setPassword($password);
