@@ -1,5 +1,5 @@
 name: Shopping Cart Plugin PayPal Express
-version: 1.0.0
+version: 1.0.1
 description: "Add PayPal Express checkout to the Grav Shopping Cart Plugin. Requires a PayPal Premier / Business account."
 icon: shopping-cart
 author:
