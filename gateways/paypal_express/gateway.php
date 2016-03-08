@@ -1,18 +1,25 @@
 <?php
 namespace Grav\Plugin;
 
-use Grav\Common\Plugin;
-use Grav\Common\Grav;
 use RocketTheme\Toolbox\Event\Event;
 use Omnipay\Omnipay;
 
+/**
+ * Class ShoppingCartGatewayPayPalExpress
+ * @package Grav\Plugin
+ */
 class ShoppingCartGatewayPayPalExpress extends ShoppingCartGateway
 {
     protected $name = 'paypal_express';
 
+    /**
+     * @param $gateway
+     *
+     * @return \Omnipay\Common\GatewayInterface|void
+     */
     protected function setupGateway($gateway)
     {
-        if (!$this->isCurrentGateway($gateway)) { return; }
+        if (!$this->isCurrentGateway($gateway)) { return false; }
 
         $pluginConfig = $this->grav['config']->get('plugins.shoppingcart');
         $gatewayConfig = $pluginConfig['payment']['methods']['paypal_express'];
@@ -31,6 +38,9 @@ class ShoppingCartGatewayPayPalExpress extends ShoppingCartGateway
         return $gateway;
     }
 
+    /**
+     * @param Event $event
+     */
     public function onShoppingCartPreparePayment(Event $event)
     {
         $gatewayName = $event['gateway'];
@@ -63,6 +73,9 @@ class ShoppingCartGatewayPayPalExpress extends ShoppingCartGateway
         exit();
     }
 
+    /**
+     * @param Event $event
+     */
     public function onShoppingCartGotBackFromGateway(Event $event)
     {
         $gatewayName = $event['gateway'];
@@ -80,6 +93,10 @@ class ShoppingCartGatewayPayPalExpress extends ShoppingCartGateway
 
     /**
      * Handle paying via this gateway
+     *
+     * @param Event $event
+     *
+     * @return mixed|void
      */
     public function onShoppingCartPay(Event $event)
     {
@@ -89,12 +106,12 @@ class ShoppingCartGatewayPayPalExpress extends ShoppingCartGateway
         $order = $this->getOrderFromEvent($event);
         $gateway = $this->setupGateway($gatewayName);
 
-        $response = $gateway->completePurchase(array(
+        $response = $gateway->completePurchase([
             'payer_id' => $event['payer_id'],
             'transactionReference' => $event['transactionReference'],
             'amount' => $order->amount,
             'currency' => $order->currency,
-        ))->send();
+        ])->send();
 
         if ($response->isSuccessful()) {
             // mark order as complete

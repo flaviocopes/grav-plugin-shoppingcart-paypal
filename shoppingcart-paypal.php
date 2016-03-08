@@ -5,6 +5,10 @@ use Grav\Common\Plugin;
 use Grav\Common\Uri;
 use RocketTheme\Toolbox\Event\Event;
 
+/**
+ * Class ShoppingcartPaypalPlugin
+ * @package Grav\Plugin
+ */
 class ShoppingcartPaypalPlugin extends Plugin
 {
     protected $plugin_name = 'shoppingcart-paypal';
@@ -68,6 +72,11 @@ class ShoppingcartPaypalPlugin extends Plugin
         }
     }
 
+    /**
+     * Add the PayPal gateway
+     *
+     * @param $event
+     */
     public function onShoppingCartGateways($event)
     {
         require_once __DIR__ . '/gateways/paypal_express/gateway.php';
