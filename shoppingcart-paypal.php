@@ -53,7 +53,6 @@ class ShoppingcartPaypalPlugin extends Plugin
                 'onTwigSiteVariables'          => ['onTwigSiteVariables', 0],
                 'onShoppingCartPay'            => ['onShoppingCartPay', 0],
                 'onShoppingCartPreparePayment' => ['onShoppingCartPreparePayment', 0],
-                'onShoppingCartGateways'       => ['onShoppingCartGateways', 0]
             ]);
 
             /** @var Uri $uri */
@@ -70,18 +69,6 @@ class ShoppingcartPaypalPlugin extends Plugin
             }
 
         }
-    }
-
-    /**
-     * Add the PayPal gateway
-     *
-     * @param $event
-     */
-    public function onShoppingCartGateways($event)
-    {
-        require_once __DIR__ . '/gateways/paypal_express/gateway.php';
-
-        $event->gateways['paypal'] = new ShoppingCartGatewayPayPalExpress();
     }
 
     /**
