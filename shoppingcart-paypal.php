@@ -39,9 +39,8 @@ class ShoppingcartPaypalPlugin extends Plugin
     {
         require_once __DIR__ . '/vendor/autoload.php';
 
-        $this->config->set('plugins.shoppingcart', array_replace_recursive($this->config->get('plugins.shoppingcart'), $this->config->get('plugins.shoppingcart-paypal')));
-
         if (!$this->isAdmin()) {
+            $this->config->set('plugins.shoppingcart', array_replace_recursive($this->config->get('plugins.shoppingcart'), $this->config->get('plugins.shoppingcart-paypal')));
 
             //OpenSSL >= 1.0.1 Required
             if(OPENSSL_VERSION_NUMBER < 0x1000100f) {
