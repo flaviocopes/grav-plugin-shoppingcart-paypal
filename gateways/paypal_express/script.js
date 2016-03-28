@@ -13,7 +13,7 @@
                 products: storejs.get('grav-shoppingcart-basket-data'),
                 address: storejs.get('grav-shoppingcart-person-address'),
                 shipping: storejs.get('grav-shoppingcart-shipping-method'),
-                payment: storejs.get('grav-shoppingcart-payment-method'),
+                payment: 'paypal',
                 token: storejs.get('grav-shoppingcart-order-token').token,
                 amount: ShoppingCart.totalOrderPrice.toString(),
                 gateway: ShoppingCart.gateway
