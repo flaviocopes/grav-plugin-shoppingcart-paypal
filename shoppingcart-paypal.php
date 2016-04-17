@@ -34,6 +34,8 @@ class ShoppingcartPaypalPlugin extends Plugin
 
     /**
      * Enable search only if url matches to the configuration.
+     *
+     * @event onShoppingCartGotBackFromGateway signal I got back from the Gateway
      */
     public function onPluginsInitialized()
     {
@@ -90,7 +92,7 @@ class ShoppingcartPaypalPlugin extends Plugin
         if (!$this->gateway) {
             $this->requireGateway();
             require_once __DIR__ . '/gateways/paypal_express/gateway.php';
-            $this->gateway = new ShoppingCartGatewayPayPalExpress();
+            $this->gateway = new ShoppingCart\GatewayPayPalExpress();
         }
 
         return $this->gateway;
