@@ -29,6 +29,17 @@ form:
       validate:
         type: bool
 
+    test_mode:
+      type: toggle
+      label: Test mode
+      highlight: 0
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
     payment.methods.paypal_express.name:
       type: hidden
       default: 'PayPal Express'

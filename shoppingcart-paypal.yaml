@@ -1,4 +1,5 @@
 enabled: true
+test_mode: false
 payment:
     methods:
         paypal_express: # http://www.putler.com/support/faq/how-to-get-paypal-api-username-password-and-signature-information/
