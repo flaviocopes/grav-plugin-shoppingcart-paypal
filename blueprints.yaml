@@ -45,8 +45,9 @@ form:
       default: 'PayPal Express'
 
     payment.methods.paypal_express.name:
-      type: spacer
-      text: See <a target="_blank" href="http://www.putler.com/support/faq/how-to-get-paypal-api-username-password-and-signature-information/">this link</a> on how to fill the following required fields
+      type: display
+      markdown: true
+      content: See [this link](http://www.putler.com/support/faq/how-to-get-paypal-api-username-password-and-signature-information/) on how to fill the following required fields
 
     payment.methods.paypal_express.username:
       type: text
