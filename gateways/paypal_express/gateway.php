@@ -111,11 +111,14 @@ class GatewayPayPalExpress extends Gateway
         $order = $this->getOrderFromEvent($event);
         $gateway = $this->setupGateway($gatewayName);
 
+        $pluginConfig = $this->grav['config']->get('plugins.shoppingcart');
+        $currency = $pluginConfig['general']['currency'];
+
         $response = $gateway->completePurchase([
             'payer_id' => $event['payer_id'],
             'transactionReference' => $event['transactionReference'],
             'amount' => $order->amount,
-            'currency' => $order->currency,
+            'currency' => $currency,
         ])->send();
 
         if ($response->isSuccessful()) {
