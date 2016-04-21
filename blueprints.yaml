@@ -1,5 +1,5 @@
 name: Shopping Cart PayPal Express Addon
-version: 1.0.1
+version: 1.0.2
 description: "Add PayPal Express checkout to the Grav Shopping Cart Plugin. Requires a PayPal Premier / Business account."
 icon: shopping-cart
 author:
@@ -13,7 +13,7 @@ bugs: https://github.com/flaviocopes/grav-plugin-shoppingcart/issues
 license: MIT
 
 dependencies:
-  - shoppingcart: '~1.0'
+  - { name: shoppingcart, version: '~1.0' }
 
 form:
   validation: loose
@@ -22,6 +22,17 @@ form:
       type: toggle
       label: PLUGIN_ADMIN.PLUGIN_STATUS
       highlight: 1
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    test_mode:
+      type: toggle
+      label: Test mode
+      highlight: 0
       default: 0
       options:
         1: PLUGIN_ADMIN.ENABLED

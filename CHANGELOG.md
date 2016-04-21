@@ -1,3 +1,11 @@
+# v1.0.2
+## 21-04-2016
+
+1. [](#bugfix)
+    * Use correct currency value
+    * Use correct dependencies format for Grav 1.1
+    * Add test mode setting
+
 # v1.0.1
 ## 28-02-2016
 
