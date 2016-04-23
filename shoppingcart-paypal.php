@@ -21,7 +21,8 @@ class ShoppingcartPaypalPlugin extends Plugin
     public static function getSubscribedEvents()
     {
         return [
-            'onPluginsInitialized' => ['onPluginsInitialized', 0]
+            'onPluginsInitialized' => ['onPluginsInitialized', 0],
+            'onPagesInitialized' => ['onPagesInitialized', 0]
         ];
     }
 
@@ -55,6 +56,12 @@ class ShoppingcartPaypalPlugin extends Plugin
                 'onShoppingCartPay'            => ['onShoppingCartPay', 0],
                 'onShoppingCartPreparePayment' => ['onShoppingCartPreparePayment', 0],
             ]);
+        }
+    }
+
+    public function onPagesInitialized()
+    {
+        if (!$this->isAdmin()) {
 
             /** @var Uri $uri */
             $uri = $this->grav['uri'];
@@ -68,7 +75,6 @@ class ShoppingcartPaypalPlugin extends Plugin
                 ]);
                 $this->grav->fireEvent('onShoppingCartGotBackFromGateway', new Event(['gateway' => 'paypal_express']));
             }
-
         }
     }
 
