@@ -43,10 +43,12 @@ class ShoppingcartPaypalPlugin extends Plugin
         require_once __DIR__ . '/vendor/autoload.php';
 
         if (!$this->isAdmin()) {
-            $this->config->set('plugins.shoppingcart', array_replace_recursive($this->config->get('plugins.shoppingcart'), $this->config->get('plugins.shoppingcart-paypal')));
+            $this->config->set('plugins.shoppingcart',
+                array_replace_recursive($this->config->get('plugins.shoppingcart'),
+                    $this->config->get('plugins.shoppingcart-paypal')));
 
             //OpenSSL >= 1.0.1 Required
-            if(OPENSSL_VERSION_NUMBER < 0x1000100f) {
+            if (OPENSSL_VERSION_NUMBER < 0x1000100f) {
                 throw new \RuntimeException("PayPal Plugin Error. Your OpenSSL Version is too old. PayPal Sandbox needs at least OpenSSL 1.0.1 because of recent changes on their side. Please update your OpenSSL version, or ask your hosting provider to update it.");
             }
 
