@@ -33,14 +33,15 @@ class ShoppingcartPaypalPlugin extends Plugin
         $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/gateways/paypal_express/script.js');
     }
 
-        /**
-         */
-        public function mergeShoppingCartPluginConfig()
-        {
-            $config = $this->config->get('plugins.' . $this->plugin_name);
-            unset($config['enabled']);
-            $this->config->set('plugins.shoppingcart', array_replace_recursive($this->config->get('plugins.shoppingcart'), $config));
-        }
+    /**
+     */
+    public function mergeShoppingCartPluginConfig()
+    {
+        $config = $this->config->get('plugins.' . $this->plugin_name);
+        unset($config['enabled']);
+        $this->config->set('plugins.shoppingcart', array_replace_recursive($this->config->get('plugins.shoppingcart'), $config));
+    }
+
     /**
      * Enable search only if url matches to the configuration.
      *
