@@ -33,6 +33,14 @@ class ShoppingcartPaypalPlugin extends Plugin
         $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/gateways/paypal_express/script.js');
     }
 
+        /**
+         */
+        public function mergeShoppingCartPluginConfig()
+        {
+            $config = $this->config->get('plugins.' . $this->plugin_name);
+            unset($config['enabled']);
+            $this->config->set('plugins.shoppingcart', array_replace_recursive($this->config->get('plugins.shoppingcart'), $config));
+        }
     /**
      * Enable search only if url matches to the configuration.
      *
@@ -43,9 +51,7 @@ class ShoppingcartPaypalPlugin extends Plugin
         require_once __DIR__ . '/vendor/autoload.php';
 
         if (!$this->isAdmin()) {
-            $this->config->set('plugins.shoppingcart',
-                array_replace_recursive($this->config->get('plugins.shoppingcart'),
-                    $this->config->get('plugins.shoppingcart-paypal')));
+            $this->mergeShoppingCartPluginConfig();
 
             //OpenSSL >= 1.0.1 Required
             if (OPENSSL_VERSION_NUMBER < 0x1000100f) {
