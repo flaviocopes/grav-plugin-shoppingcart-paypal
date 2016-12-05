@@ -1,3 +1,15 @@
+# v1.1.0
+## 05-12-2016
+
+1. [](#new)
+    * 1.1 released
+
+# v1.1.0-beta.2
+## 30-04-2016
+
+1. [](#new)
+    * Use the new URL callback structure for ShoppingCart 1.1
+
 # v1.0.2
 ## 21-04-2016
 

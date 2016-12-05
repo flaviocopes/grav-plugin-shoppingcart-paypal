@@ -1,19 +1,21 @@
 name: Shopping Cart PayPal Express Addon
-version: 1.0.2
+version: 1.1.0
 description: "Add PayPal Express checkout to the Grav Shopping Cart Plugin. Requires a PayPal Premier / Business account."
 icon: shopping-cart
 author:
   name: Flavio Copes
   email: copesc@gmail.com
-  url: http://flaviocopes.com
-homepage: http://gravshoppingcart.com
+  url: https://flaviocopes.com
+homepage: https://gravcart.com
 keywords: shoppingcart, ecommerce, e-commerce, plugin, shop, cart, paypal
-readme: https://gravshoppingcart.com/docs
+readme: https://gravcart.com/docs
 bugs: https://github.com/flaviocopes/grav-plugin-shoppingcart/issues
 license: MIT
 
+testing: true
+
 dependencies:
-  - { name: shoppingcart, version: '~1.0' }
+  - { name: shoppingcart, version: '~1.1' }
 
 form:
   validation: loose
@@ -45,8 +47,9 @@ form:
       default: 'PayPal Express'
 
     payment.methods.paypal_express.name:
-      type: spacer
-      text: See <a target="_blank" href="http://www.putler.com/support/faq/how-to-get-paypal-api-username-password-and-signature-information/">this link</a> on how to fill the following required fields
+      type: display
+      markdown: true
+      content: See [this link](http://www.putler.com/support/faq/how-to-get-paypal-api-username-password-and-signature-information/) on how to fill the following required fields
 
     payment.methods.paypal_express.username:
       type: text

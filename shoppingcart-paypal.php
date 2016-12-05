@@ -21,7 +21,8 @@ class ShoppingcartPaypalPlugin extends Plugin
     public static function getSubscribedEvents()
     {
         return [
-            'onPluginsInitialized' => ['onPluginsInitialized', 0]
+            'onPluginsInitialized' => ['onPluginsInitialized', 0],
+            'onPagesInitialized' => ['onPagesInitialized', 0]
         ];
     }
 
@@ -33,17 +34,28 @@ class ShoppingcartPaypalPlugin extends Plugin
     }
 
     /**
+     */
+    public function mergeShoppingCartPluginConfig()
+    {
+        $config = $this->config->get('plugins.' . $this->plugin_name);
+        unset($config['enabled']);
+        $this->config->set('plugins.shoppingcart', array_replace_recursive($this->config->get('plugins.shoppingcart'), $config));
+    }
+
+    /**
      * Enable search only if url matches to the configuration.
+     *
+     * @event onShoppingCartGotBackFromGateway signal I got back from the Gateway
      */
     public function onPluginsInitialized()
     {
         require_once __DIR__ . '/vendor/autoload.php';
 
         if (!$this->isAdmin()) {
-            $this->config->set('plugins.shoppingcart', array_replace_recursive($this->config->get('plugins.shoppingcart'), $this->config->get('plugins.shoppingcart-paypal')));
+            $this->mergeShoppingCartPluginConfig();
 
             //OpenSSL >= 1.0.1 Required
-            if(OPENSSL_VERSION_NUMBER < 0x1000100f) {
+            if (OPENSSL_VERSION_NUMBER < 0x1000100f) {
                 throw new \RuntimeException("PayPal Plugin Error. Your OpenSSL Version is too old. PayPal Sandbox needs at least OpenSSL 1.0.1 because of recent changes on their side. Please update your OpenSSL version, or ask your hosting provider to update it.");
             }
 
@@ -53,6 +65,12 @@ class ShoppingcartPaypalPlugin extends Plugin
                 'onShoppingCartPay'            => ['onShoppingCartPay', 0],
                 'onShoppingCartPreparePayment' => ['onShoppingCartPreparePayment', 0],
             ]);
+        }
+    }
+
+    public function onPagesInitialized()
+    {
+        if (!$this->isAdmin()) {
 
             /** @var Uri $uri */
             $uri = $this->grav['uri'];
@@ -66,7 +84,6 @@ class ShoppingcartPaypalPlugin extends Plugin
                 ]);
                 $this->grav->fireEvent('onShoppingCartGotBackFromGateway', new Event(['gateway' => 'paypal_express']));
             }
-
         }
     }
 
@@ -90,7 +107,7 @@ class ShoppingcartPaypalPlugin extends Plugin
         if (!$this->gateway) {
             $this->requireGateway();
             require_once __DIR__ . '/gateways/paypal_express/gateway.php';
-            $this->gateway = new ShoppingCartGatewayPayPalExpress();
+            $this->gateway = new ShoppingCart\GatewayPayPalExpress();
         }
 
         return $this->gateway;

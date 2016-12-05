@@ -1,14 +1,14 @@
 <?php
-namespace Grav\Plugin;
+namespace Grav\Plugin\ShoppingCart;
 
 use RocketTheme\Toolbox\Event\Event;
 use Omnipay\Omnipay;
 
 /**
- * Class ShoppingCartGatewayPayPalExpress
- * @package Grav\Plugin
+ * Class GatewayPayPalExpress
+ * @package Grav\Plugin\ShoppingCart
  */
-class ShoppingCartGatewayPayPalExpress extends ShoppingCartGateway
+class GatewayPayPalExpress extends Gateway
 {
     protected $name = 'paypal_express';
 
@@ -75,6 +75,8 @@ class ShoppingCartGatewayPayPalExpress extends ShoppingCartGateway
 
     /**
      * @param Event $event
+     *
+     * @event onShoppingCartPay signal pay for an order
      */
     public function onShoppingCartGotBackFromGateway(Event $event)
     {
@@ -95,6 +97,9 @@ class ShoppingCartGatewayPayPalExpress extends ShoppingCartGateway
      * Handle paying via this gateway
      *
      * @param Event $event
+     *
+     * @event onShoppingCartSaveOrder signal save the order
+     * @event onShoppingCartRedirectToOrderPageUrl signal redirect to the order page
      *
      * @return mixed|void
      */

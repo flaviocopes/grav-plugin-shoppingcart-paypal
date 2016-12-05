@@ -11,16 +11,16 @@
 
             var order = {
                 products: storejs.get('grav-shoppingcart-basket-data'),
-                address: storejs.get('grav-shoppingcart-person-address'),
+                data: storejs.get('grav-shoppingcart-checkout-form-data'),
                 shipping: storejs.get('grav-shoppingcart-shipping-method'),
-                payment: storejs.get('grav-shoppingcart-payment-method'),
+                payment: 'paypal',
                 token: storejs.get('grav-shoppingcart-order-token').token,
                 amount: ShoppingCart.totalOrderPrice.toString(),
                 gateway: ShoppingCart.gateway
             };
 
             jQuery.ajax({
-                url: ShoppingCart.settings.baseURL + ShoppingCart.settings.urls.saveOrderURL + '?task=preparePayment',
+                url: ShoppingCart.settings.baseURL + ShoppingCart.settings.urls.save_order_url + '/task:preparePayment',
                 data: order,
                 type: 'POST'
             })
