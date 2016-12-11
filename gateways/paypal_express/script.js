@@ -15,6 +15,7 @@
                 shipping: storejs.get('grav-shoppingcart-shipping-method'),
                 payment: 'paypal',
                 token: storejs.get('grav-shoppingcart-order-token').token,
+                taxes: ShoppingCart.taxesApplied.toString(),
                 amount: ShoppingCart.totalOrderPrice.toString(),
                 gateway: ShoppingCart.gateway
             };

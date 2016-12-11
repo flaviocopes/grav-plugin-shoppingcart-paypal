@@ -59,15 +59,24 @@ class GatewayPayPalExpress extends Gateway
 
         $this->grav['session']->order = $order->toArray();
 
+        $items = [];
+        foreach ($order->products as $product) {
+            $items[] = ['name' => $product['product']['title'], 'quantity' => $product['quantity'], 'price' => $product['product']['price']];
+        }
+
         $params = [
-            'cancelUrl'=> $cancelUrl,
-            'returnUrl'=> $returnUrl,
+            'cancelUrl' => $cancelUrl,
+            'returnUrl' => $returnUrl,
             'amount' =>  $order->amount,
-            'currency' => $currency,
-            //'description' => 'Test Purchase for 12.99'
+            'shippingAmount' => $order->shipping['cost'],
+            'currency' => $currency
         ];
 
-        $response = $gateway->purchase($params)->send();
+        if ($pluginConfig['general']['product_taxes'] === 'excluded') {
+            $params['taxAmount'] = $order->taxes;
+        }
+
+        $response = $gateway->purchase($params)->setItems($items)->send();
 
         echo $response->getRedirectUrl();
         exit();

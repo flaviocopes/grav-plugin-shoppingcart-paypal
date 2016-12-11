@@ -1,3 +1,9 @@
+# v1.1.1
+## 11-12-2016
+
+1. [](#new)
+    * Pass items information to PayPal. Also store taxes in the order.
+
 # v1.1.0
 ## 05-12-2016
 
