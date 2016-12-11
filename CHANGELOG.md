@@ -1,5 +1,5 @@
-# v1.1.x
-## xx-12-2016
+# v1.1.1
+## 11-12-2016
 
 1. [](#new)
     * Pass items information to PayPal. Also store taxes in the order.
