@@ -123,11 +123,17 @@ class GatewayPayPalExpress extends Gateway
         $pluginConfig = $this->grav['config']->get('plugins.shoppingcart');
         $currency = $pluginConfig['general']['currency'];
 
+        $items = [];
+        foreach ($order->products as $product) {
+            $items[] = ['name' => $product['product']['title'], 'quantity' => $product['quantity'], 'price' => $product['product']['price']];
+        }
+
         $response = $gateway->completePurchase([
             'payer_id' => $event['payer_id'],
             'transactionReference' => $event['transactionReference'],
             'amount' => $order->amount,
             'currency' => $currency,
+            'description' => $items,
         ])->send();
 
         if ($response->isSuccessful()) {
