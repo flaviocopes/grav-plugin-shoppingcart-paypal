@@ -59,9 +59,14 @@ class GatewayPayPalExpress extends Gateway
 
         $this->grav['session']->order = $order->toArray();
 
-        $items = [];
+        $items = new \Omnipay\PayPal\PayPalItemBag();
+
         foreach ($order->products as $product) {
-            $items[] = ['name' => $product['product']['title'], 'quantity' => $product['quantity'], 'price' => $product['product']['price']];
+            $items->add(array(
+                'name' => $product['product']['title'],
+                'quantity' => $product['quantity'],
+                'price' => $product['product']['price'],
+            ));
         }
 
         $params = [
@@ -123,18 +128,23 @@ class GatewayPayPalExpress extends Gateway
         $pluginConfig = $this->grav['config']->get('plugins.shoppingcart');
         $currency = $pluginConfig['general']['currency'];
 
-        $items = [];
+        $items = new \Omnipay\PayPal\PayPalItemBag();
+
         foreach ($order->products as $product) {
-            $items[] = ['name' => $product['product']['title'], 'quantity' => $product['quantity'], 'price' => $product['product']['price']];
+            $items->add(array(
+                'name' => $product['product']['title'],
+                'quantity' => $product['quantity'],
+                'price' => $product['product']['price'],
+            ));
         }
 
         $response = $gateway->completePurchase([
             'payer_id' => $event['payer_id'],
             'transactionReference' => $event['transactionReference'],
             'amount' => $order->amount,
+            'shippingAmount' => $order->shipping['cost'],
             'currency' => $currency,
-            'description' => $items,
-        ])->send();
+        ])->setItems($items)->send();
 
         if ($response->isSuccessful()) {
             // mark order as complete

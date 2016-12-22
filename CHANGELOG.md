@@ -1,3 +1,9 @@
+# v1.1.x
+## xx-12-2016
+
+1. [](#new)
+    * Allow PayPal to list the items in its transaction details
+
 # v1.1.1
 ## 11-12-2016
 
